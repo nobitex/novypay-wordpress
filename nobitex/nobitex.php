@@ -18,7 +18,7 @@ function nobitex_load()
 {
     include_once "class-nobitex.php";
 
-    if ( ! class_exists( 'Woocommerce_Ir_Gateway_PayIr' ) ) {
+    if (!class_exists('Woocommerce_Ir_Gateway_PayIr')) {
 
         nobitex_abstract::register('Nobitex');
 
@@ -66,19 +66,20 @@ function nobitex_load()
                 if (!extension_loaded('curl')) {
                     return 'تابع cURL روی هاست شما فعال نیست.';
                 }
-                $url = $this->option('sandbox')=='1' ? "https://testnetapi.nobitex.net/" : "https://api.nobitex.ir/";
-                $site_url = $this->option('sandbox')=='1' ? "https://testnet.nobitex.net/" : "https://nobitex.market/";
+                $url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.market/" : "https://api.nobitex.ir/";
+                $site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.market/" : "https://nobitex.market/";
                 $amount = $this->get_total('IRR');
-                $callback = $this->option('sandbox')=='1' ? 'http://testnet.nobitex.net/app/callback-gateway/' : $this->get_verify_url();
+//                $callback = $this->option('sandbox')=='1' ? 'http://testnet.nobitex.net/app/callback-gateway/' : $this->get_verify_url();
+                $callback = $this->get_verify_url();
                 $mobile = $this->get_order_mobile();
                 $order_number = $this->get_order_props('order_number');
                 $description = 'شماره سفارش #' . $order_number;
-                $apiID = $this->option( 'sandbox' ) == '1' ? 'DemoApiKey' : $this->option( 'api' );
-                $data = array("api" => $apiID, "callbackURL" => $callback , "amount" => $amount, "currencies" => "btc");
+                $apiID = $this->option('sandbox') == '1' ? (!empty($this->option('api')) ? $this->option('api') : 'DemoApiKey') : $this->option('api');
+                $data = array("api" => $apiID, "callbackURL" => $callback, "amount" => $amount, "currencies" => "btc");
                 $header = array("content-type" => "application/json");
 
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url.'pg/send/');
+                curl_setopt($ch, CURLOPT_URL, $url . 'pg/send/');
                 // curl_setopt( $ch, CURLOPT_POSTFIELDS, "api=$apiID&amount=$amount&callbackURL=$callback&factorNumber=$order_number&mobile=$mobile&description=$description&resellerId=1000000800&currencies=btc" );
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -90,18 +91,19 @@ function nobitex_load()
 
                 curl_close($ch);
                 $result = json_decode($result);
-                if (!empty($result->status) && $result->status) {
-                    return $this->redirect($site_url."app/paygate/" . $result->token);
+                if (!empty($result->status) && $result->status == "success") {
+                    return $this->redirect($site_url . "app/paygate/" . $result->token);
                 } else {
-                    return !empty($result->errorMessage) ? $result->errorMessage : (!empty($result->errorCode) ? $this->errors($result->errorCode) : '');
+                    $error_message = !empty($result->message) ? $result->message : (!empty($result->errorCode) ? $this->errors($result->errorCode) : '');
+                    return print_r("<p style='color: red'>".$error_message."</p>");
                 }
             }
 
             public function verify($order)
             {
-                $url = $this->option('sandbox')=='1' ? "https://testnetapi.nobitex.net/" : "https://api.nobitex.ir/";
-                $site_url = $this->option('sandbox')=='1' ? "https://testnet.nobitex.net/" : "https://nobitex.market/";
-                $apiID= $this->option( 'sandbox' ) == '1' ? 'DemoApiKey' : $this->option( 'api' );
+                $url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.market/" : "https://api.nobitex.ir/";
+                $site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.market/" : "https://nobitex.market/";
+                $apiID = $this->option('sandbox') == '1' ? (!empty($this->option('api')) ? $this->option('api') : 'DemoApiKey') : $this->option('api');
                 $transaction_id = $this->get('token');
                 //$factorNumber = $this->post( 'factorNumber' );
 
@@ -112,7 +114,7 @@ function nobitex_load()
                 if ($apiID == 'DemoApiKey' || $this->get('status')) {
 
                     $ch = curl_init();
-                    curl_setopt($ch, CURLOPT_URL, $url.'pg/verify/');
+                    curl_setopt($ch, CURLOPT_URL, $url . 'pg/verify/');
                     curl_setopt($ch, CURLOPT_POSTFIELDS, "api=$apiID&token=$transaction_id");
                     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
                     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
