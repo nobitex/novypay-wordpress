@@ -66,6 +66,38 @@ function nobitex_load()
                 if (!extension_loaded('curl')) {
                     return 'تابع cURL روی هاست شما فعال نیست.';
                 }
+                $currencies = '';
+                if ($this->option('btc') == '1') {
+                    if ($currencies !='')
+                    {
+                        $currencies .= ',btc';
+                    }
+                    else
+                    {
+                        $currencies .='btc';
+                    }
+                }
+                if ($this->option('ltc') == '1') {
+                    if ($currencies !='')
+                    {
+                        $currencies .= ',ltc';
+                    }
+                    else
+                    {
+                        $currencies .= 'ltc';
+                    }
+                }
+                if ($this->option('xrp') == '1') {
+                    if ($currencies !='')
+                    {
+                        $currencies .= ',xrp';
+                    }
+                    else
+                    {
+                        $currencies .= 'xrp ';
+                    }
+                }
+
                 $url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.market/" : "https://api.nobitex.ir/";
                 $site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.market/" : "https://nobitex.market/";
                 $amount = $this->get_total('IRR');
@@ -75,7 +107,7 @@ function nobitex_load()
                 $order_number = $this->get_order_props('order_number');
                 $description = 'شماره سفارش #' . $order_number;
                 $apiID = $this->option('sandbox') == '1' ? (!empty($this->option('api')) ? $this->option('api') : 'DemoApiKey') : $this->option('api');
-                $data = array("api" => $apiID, "callbackURL" => $callback, "amount" => $amount, "currencies" => "btc");
+                $data = array("api" => $apiID, "callbackURL" => $callback, "amount" => $amount, "currencies" => $currencies);
                 $header = array("content-type" => "application/json");
 
                 $ch = curl_init();
@@ -95,7 +127,8 @@ function nobitex_load()
                     return $this->redirect($site_url . "app/paygate/" . $result->token);
                 } else {
                     $error_message = !empty($result->message) ? $result->message : (!empty($result->errorCode) ? $this->errors($result->errorCode) : '');
-                    return print_r("<p style='color: red'>".$error_message."</p>");
+                    print_r($this->get_total('EUR'));
+                    return print_r("<p style='color: red'>" . $error_message . "</p>");
                 }
             }
 
@@ -211,4 +244,5 @@ function nobitex_load()
 }
 
 add_action('plugins_loaded', 'nobitex_load', 0);
+
 
