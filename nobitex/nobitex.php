@@ -62,6 +62,10 @@ function nobitex_load()
 
             public function request($order)
             {
+                if(empty($this->option('secret-key'))) {
+                    $error_message = 'you have to set api secret first';
+                    return print_r("<p style='color: red'>" . $error_message . "</p>");
+                }
 
                 if (!extension_loaded('curl')) {
                     return 'تابع cURL روی هاست شما فعال نیست.';
@@ -127,7 +131,6 @@ function nobitex_load()
                     return $this->redirect($site_url . "app/paygate/" . $result->token);
                 } else {
                     $error_message = !empty($result->message) ? $result->message : (!empty($result->errorCode) ? $this->errors($result->errorCode) : '');
-                    print_r($this->get_total('EUR'));
                     return print_r("<p style='color: red'>" . $error_message . "</p>");
                 }
             }
@@ -141,6 +144,13 @@ function nobitex_load()
                 //$factorNumber = $this->post( 'factorNumber' );
 
                 $this->check_verification($transaction_id);
+
+                $token = $_GET['token'];
+                $amount_string =number_format($this->get_total('IRR'),0,'.','');
+                $amount_string = strval($amount_string);
+
+                $secret_key = str_replace("-","",$this->option('secret_key'));
+                $md5_secret = md5($token.$amount_string.$secret_key);
 
                 $error = '';
                 $status = 'failed';
@@ -156,7 +166,11 @@ function nobitex_load()
                     $result = json_decode($result);
 
                     if (!empty($result->status) && $result->status) {
-                        $status = 'completed';
+                        if ($md5_secret === $result->txHash)
+                            $status = 'completed';
+                        else{
+                            $error = 'your secret key is wrong! or there is a Man In The Middle!';
+                        }
                     } else {
                         $error = !empty($result->errorMessage) ? $result->errorMessage : (!empty($result->errorCode) ? $this->errors(($result->errorCode . '1')) : '');
                     }
