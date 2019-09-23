@@ -62,7 +62,7 @@ function nobitex_load()
 
             public function request($order)
             {
-                if(empty($this->option('secret-key'))) {
+                if(empty($this->option('secret_key'))) {
                     $error_message = 'you have to set api secret first';
                     return print_r("<p style='color: red'>" . $error_message . "</p>");
                 }
