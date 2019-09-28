@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a2abd3db-191b-45c3-8c70-8e6579a5d773" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nobitex/class-nobitex.php" beforeDir="false" afterPath="$PROJECT_DIR$/nobitex/class-nobitex.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nobitex/nobitex.php" beforeDir="false" afterPath="$PROJECT_DIR$/nobitex/nobitex.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nobitex/nobitex.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+            <state relative-caret-position="396">
+              <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
               <folding>
                 <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
@@ -26,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nobitex/class-nobitex.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12393">
-              <caret line="729" column="10" selection-start-line="729" selection-start-column="10" selection-end-line="729" selection-end-column="10" />
+            <state relative-caret-position="209">
+              <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -43,8 +44,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/nobitex/class-nobitex.php" />
         <option value="$PROJECT_DIR$/nobitex/nobitex.php" />
+        <option value="$PROJECT_DIR$/nobitex/class-nobitex.php" />
       </list>
     </option>
   </component>
@@ -59,7 +60,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -76,6 +76,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -109,18 +110,19 @@
       <workItem from="1569054939401" duration="1288000" />
       <workItem from="1569067232030" duration="597000" />
       <workItem from="1569148856843" duration="1492000" />
-      <workItem from="1569216029818" duration="1088000" />
+      <workItem from="1569216029818" duration="1396000" />
+      <workItem from="1569643956853" duration="628000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4465000" />
+    <option name="totallyTimeSpent" value="5401000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18305598" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1860817" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -133,7 +135,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.21767594" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.21767594" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -147,8 +149,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/nobitex/nobitex.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="72" column="31" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
+        <state relative-caret-position="396">
+          <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
           <folding>
             <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
@@ -158,8 +160,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nobitex/class-nobitex.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12393">
-          <caret line="729" column="10" selection-start-line="729" selection-start-column="10" selection-end-line="729" selection-end-column="10" />
+        <state relative-caret-position="209">
+          <caret line="46" column="38" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
         </state>
       </provider>
     </entry>

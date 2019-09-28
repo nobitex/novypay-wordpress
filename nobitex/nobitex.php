@@ -62,7 +62,7 @@ function nobitex_load()
 
             public function request($order)
             {
-                if(empty($this->option('secret_key'))) {
+                if (empty($this->option('secret_key'))) {
                     $error_message = 'you have to set api secret first';
                     return print_r("<p style='color: red'>" . $error_message . "</p>");
                 }
@@ -72,39 +72,32 @@ function nobitex_load()
                 }
                 $currencies = '';
                 if ($this->option('btc') == '1') {
-                    if ($currencies !='')
-                    {
+                    if ($currencies != '') {
                         $currencies .= ',btc';
-                    }
-                    else
-                    {
-                        $currencies .='btc';
+                    } else {
+                        $currencies .= 'btc';
                     }
                 }
                 if ($this->option('ltc') == '1') {
-                    if ($currencies !='')
-                    {
+                    if ($currencies != '') {
                         $currencies .= ',ltc';
-                    }
-                    else
-                    {
+                    } else {
                         $currencies .= 'ltc';
                     }
                 }
                 if ($this->option('xrp') == '1') {
-                    if ($currencies !='')
-                    {
+                    if ($currencies != '') {
                         $currencies .= ',xrp';
-                    }
-                    else
-                    {
+                    } else {
                         $currencies .= 'xrp ';
                     }
                 }
+                global $woocommerce;
 
                 $url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.market/" : "https://api.nobitex.ir/";
                 $site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.market/" : "https://nobitex.market/";
                 $amount = $this->get_total('IRR');
+                $amount = apply_filters('filter_nobitex_final_amount', $amount, $total_amount = $woocommerce->cart->total);
 //                $callback = $this->option('sandbox')=='1' ? 'http://testnet.nobitex.net/app/callback-gateway/' : $this->get_verify_url();
                 $callback = $this->get_verify_url();
                 $mobile = $this->get_order_mobile();
@@ -146,11 +139,11 @@ function nobitex_load()
                 $this->check_verification($transaction_id);
 
                 $token = $_GET['token'];
-                $amount_string =number_format($this->get_total('IRR'),0,'.','');
+                $amount_string = number_format($this->get_total('IRR'), 0, '.', '');
                 $amount_string = strval($amount_string);
 
-                $secret_key = str_replace("-","",$this->option('secret_key'));
-                $md5_secret = md5($token.$amount_string.$secret_key);
+                $secret_key = str_replace("-", "", $this->option('secret_key'));
+                $md5_secret = md5($token . $amount_string . $secret_key);
 
                 $error = '';
                 $status = 'failed';
@@ -168,7 +161,7 @@ function nobitex_load()
                     if (!empty($result->status) && $result->status) {
                         if ($md5_secret === $result->txHash)
                             $status = 'completed';
-                        else{
+                        else {
                             $error = 'your secret key is wrong! or there is a Man In The Middle!';
                         }
                     } else {
