@@ -139,7 +139,11 @@ function nobitex_load()
                 $this->check_verification($transaction_id);
 
                 $token = $_GET['token'];
-                $amount_string = number_format($this->get_total('IRR'), 0, '.', '');
+
+                $total = $this->get_total('IRR');
+                $total = apply_filters('filter_nobitex_verify_amount', $total);
+
+                $amount_string = number_format($total, 0, '.', '');
                 $amount_string = strval($amount_string);
 
                 $secret_key = str_replace("-", "", $this->option('secret_key'));
