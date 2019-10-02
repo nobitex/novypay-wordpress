@@ -147,7 +147,7 @@ function nobitex_load()
                 $amount_string = strval($amount_string);
 
                 $secret_key = str_replace("-", "", $this->option('secret_key'));
-                $md5_secret = md5($token . $amount_string . $secret_key);
+                $md5_secret = hash('sha256', $token . $amount_string . $secret_key);
 
                 $error = '';
                 $status = 'failed';
