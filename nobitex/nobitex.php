@@ -28,7 +28,7 @@ function nobitex_load()
             public function __construct()
             {
 
-                $this->method_title = 'Nobitex.market';
+                $this->method_title = 'Nobitex.ir';
 //                $this->icon = apply_filters('woocommerce_ir_gateway_nobitex_icon', PW()->plugin_url('assets/images/nobitex.png'));
 
                 parent::init($this);
@@ -41,15 +41,15 @@ function nobitex_load()
                     'api' => array(
                         'title' => 'API',
                         'type' => 'text',
-                        'description' => 'API درگاه nobitex.market',
+                        'description' => 'API درگاه nobitex.ir',
                         'default' => '',
                         'desc_tip' => true
                     ),
                     'sandbox' => array(
                         'title' => 'فعالسازی حالت آزمایشی',
                         'type' => 'checkbox',
-                        'label' => 'فعالسازی حالت آزمایشی nobitex.market',
-                        'description' => 'برای فعال سازی حالت آزمایشی nobitex.market چک باکس را تیک بزنید.',
+                        'label' => 'فعالسازی حالت آزمایشی nobitex.ir',
+                        'description' => 'برای فعال سازی حالت آزمایشی nobitex.ir چک باکس را تیک بزنید.',
                         'default' => 'no',
                         'desc_tip' => true,
                     ),
@@ -94,8 +94,8 @@ function nobitex_load()
                 }
                 global $woocommerce;
 
-                $url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.market/" : "https://api.nobitex.ir/";
-                $site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.market/" : "https://nobitex.market/";
+                $url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.ir/" : "https://api.nobitex.ir/";
+                $site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.ir/" : "https://nobitex.ir/";
                 $amount = $this->get_total('IRR');
                 $amount = apply_filters('filter_nobitex_final_amount', $amount, $total_amount = $woocommerce->cart->total);
 //                $callback = $this->option('sandbox')=='1' ? 'http://testnet.nobitex.net/app/callback-gateway/' : $this->get_verify_url();
@@ -130,8 +130,8 @@ function nobitex_load()
 
             public function verify($order)
             {
-                $url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.market/" : "https://api.nobitex.ir/";
-                $site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.market/" : "https://nobitex.market/";
+                $url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.ir/" : "https://api.nobitex.ir/";
+                $site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.ir/" : "https://nobitex.ir/";
                 $apiID = $this->option('sandbox') == '1' ? (!empty($this->option('api')) ? $this->option('api') : 'DemoApiKey') : $this->option('api');
                 $transaction_id = $this->get('token');
                 //$factorNumber = $this->post( 'factorNumber' );

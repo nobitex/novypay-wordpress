@@ -26,7 +26,7 @@ if (!class_exists('nobitex_abstract') && class_exists('WC_Payment_Gateway')) {
         protected function init($gateway)
         {
             $this->url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.net/" : "https://api.nobitex.ir/";
-            $this->site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.net/" : "https://nobitex.market/";
+            $this->site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.net/" : "https://nobitex.ir/";
 
             $Gateway_Class = get_class($gateway);
 
