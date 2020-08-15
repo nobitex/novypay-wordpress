@@ -56,7 +56,14 @@ function nobitex_load()
                     'cancelled_massage' => array(),
                     'shortcodes' => array(
                         'transaction_id' => 'شماره تراکنش',
-                    )
+                    ),
+                    'exchange_rate' => array(
+                        'title' => 'Exchange Rate',
+                        'type' => 'float',
+                        'description' => 'نرخ تبدیل ارز',
+                        'default' => '1',
+                        'desc_tip' => true
+                    ),
                 );
             }
 
@@ -96,7 +103,8 @@ function nobitex_load()
 
                 $url = $this->option('sandbox') == '1' ? "https://testnetapi.nobitex.ir/" : "https://api.nobitex.ir/";
                 $site_url = $this->option('sandbox') == '1' ? "https://testnet.nobitex.ir/" : "https://nobitex.ir/";
-                $amount = $this->get_total('IRR');
+                $rate = $this->option('exchange_rate');
+                $amount = $this->get_total('IRR') * $rate;
                 $amount = apply_filters('filter_nobitex_final_amount', $amount, $total_amount = $woocommerce->cart->total);
 //                $callback = $this->option('sandbox')=='1' ? 'http://testnet.nobitex.net/app/callback-gateway/' : $this->get_verify_url();
                 $callback = $this->get_verify_url();
@@ -255,5 +263,4 @@ function nobitex_load()
 }
 
 add_action('plugins_loaded', 'nobitex_load', 0);
-
 
