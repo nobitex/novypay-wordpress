@@ -148,7 +148,7 @@ if (!class_exists('nobitex_abstract') && class_exists('WC_Payment_Gateway')) {
                     'type' => 'text',
                     'desc_tip' => true,
                     'description' => 'توضیحاتی که در طی عملیات پرداخت برای این درگاه نمایش داده خواهد شد',
-                    'default' => sprintf('پرداخت امن به وسیله کلیه کارت های عضو شتاب از طریق درگاه %s', $this->method_title)
+                    'default' => 'پرداخت امن به وسیله رمزارزها از طریق درگاه Nobitex'
                 ),
                 'secret_key' => array(
                     'title' => 'Secret Key',
